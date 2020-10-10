@@ -1,35 +1,66 @@
 <template>
     <div class="body">
         <div class="container">
-            <div class="title"><h2>Fleet admiral login</h2></div>
-            <div class="form">
+            <div class="title">
+                <h2>Hello fleet admiral!</h2>
+                <div class="soldier-icon"></div>
+            </div>
+            <div class="form" ref="loginForm">
                 <vs-input
-                    label="Name"
-                    v-model="value"
-                    placeholder="Evan You"
+                    label="Username"
+                    v-model="username"
                 />
                  <vs-input
-                    label="Name"
+                    label="Password"
                     type="password"
-                    v-model="value"
-                    placeholder="Evan You"
+                    v-model="password"
                 />
                 <vs-button class="login-button"
                     gradient
-                    :active="active == 1"
-                    @click="active = 1"
+                    @click="loginClick"
                 >
                     Login
                 </vs-button>
             </div>
         </div>
+
     </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-export default Vue.extend({
+import { mapActions } from 'vuex'
 
+import plugins from '../../plugins'
+
+export default Vue.extend({
+  data () {
+    return {
+      username: '',
+      password: '',
+      loading: null
+    }
+  },
+  methods: {
+    ...mapActions('users', [
+      'login'
+    ]),
+    loginClick () {
+      // post username password
+      const loading = this.$vs.loading({
+        target: this.$refs.loginForm,
+        color: 'dark',
+        type: 'corners'
+      })
+      this.login({ username: this.username, password: this.password })
+        .then(() => {
+          loading.close()
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    }
+  }
 })
 </script>
 
@@ -42,7 +73,7 @@ export default Vue.extend({
     }
     .container{
         width: 350px;
-        height: 400px;
+        height: 600px;
         box-shadow: 0 4px 25px 0 rgba(0,0,0,.1);
         border-radius: 8px;
         display: flex;
@@ -55,6 +86,12 @@ export default Vue.extend({
         background-color: white;
         font-weight: 100;
         color:rgba(0,0,0,.5)
+    }
+    .soldier-icon{
+        height:250px;
+        background-image: url("../assets/soldier.png");
+        background-repeat: no-repeat;
+        background-position-x: center;
     }
     .form{
         height:100%;

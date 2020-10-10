@@ -1,8 +1,11 @@
+import bodyParser from 'body-parser';
 import express = require('express');
 import session = require('express-session');
+
 import sessionFileStore = require('session-file-store');
 
 import frontend = require('./frontend')
+import api = require('./api')
 
 const app: express.Application = express();
 
@@ -13,7 +16,14 @@ app.use(session({
     secret: 'keyboard cat'
 }));
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
+app.use(bodyParser.json());
+
 // app.use(frontend);
+
+app.use('/api', api);
 
 app.get('/', (req, res) => {
     req.session!.test = 'pevec';

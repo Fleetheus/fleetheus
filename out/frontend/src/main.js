@@ -8,7 +8,7 @@ const App_vue_1 = __importDefault(require("./App.vue"));
 const router_1 = __importDefault(require("./router"));
 const store_1 = __importDefault(require("./store"));
 const vuesax_1 = __importDefault(require("vuesax"));
-require("vuesax/dist/vuesax.css"); //Vuesax styles
+require("vuesax/dist/vuesax.css"); // Vuesax styles
 vue_1.default.config.productionTip = false;
 vue_1.default.use(vuesax_1.default, {
 // options here
