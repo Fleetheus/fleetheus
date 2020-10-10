@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <router-view/>
+    <div>
+            <a href='https://www.freepik.com/vectors/abstract'>Abstract vector created by macrovector - www.freepik.com</a>
+    </div>
   </div>
 </template>
 
