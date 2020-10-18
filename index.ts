@@ -5,7 +5,10 @@ import session = require('express-session');
 import sessionFileStore = require('session-file-store');
 
 import frontend = require('./frontend')
+import Store = require('./store');
 import api = require('./api')
+
+Store.User.init();
 
 const app: express.Application = express();
 
